@@ -845,6 +845,7 @@ int diag_add_diag_id_to_list(uint8_t diag_id, char *process_name,
 	uint8_t pd_val, uint8_t peripheral)
 {
 	struct diag_id_tbl_t *new_item = NULL;
+	int process_len = 0;
 
 	if (!process_name || diag_id == 0) {
 		DIAG_LOG(DIAG_DEBUG_PERIPHERALS,
