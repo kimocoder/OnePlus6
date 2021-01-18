@@ -17,4 +17,3 @@ endif
 
 obj-$(CONFIG_DEBUG_BUS_VOTER) += msm_bus_dbg_voter.o
 
-obj-$(CONFIG_DEBUG_FS) += msm_bus_dbg.o

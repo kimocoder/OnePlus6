@@ -1313,7 +1313,7 @@ static void fp_detect(struct synaptics_ts_data *ts)
 		gf_opticalfp_irq_handler(0);
 		if (ts->fp_aod_cnt > 0)
 			need_reset = 1;
-			not_getbase = 0;
+		not_getbase = 0;
 		ts->fp_aod_cnt = 0;
 		break;
 	}
@@ -1628,7 +1628,7 @@ static void gesture_judge(struct synaptics_ts_data *ts)
 }
 #endif
 /***************end****************/
-static char prlog_count = 0;
+
 #ifdef REPORT_2D_PRESSURE
 static unsigned char pres_value = 1;
 #endif
@@ -1826,8 +1826,6 @@ void int_touch(void)
 	last_status = current_status & 0x02;
 
 	if (finger_num == 0/* && last_status && (check_key <= 1)*/) {
-		if (3 == (++prlog_count % 6))
-			TPD_ERR("all finger up\n");
 		if (ts->project_version == 0x03) {
 			if ((ts->unlock_succes == 1) && (need_reset ==1) && (ts->is_suspended == 0)) {
 				TPD_DEBUG("touch hold reset %d\n", need_reset);
@@ -2313,7 +2311,7 @@ static ssize_t synap_write_address(struct file *file, const char __user *buffer,
     }
     else
         block = temp_block;
-	return count;
+    return count;
 }
 
 #ifdef SUPPORT_GLOVES_MODE
@@ -4783,7 +4781,7 @@ static ssize_t key_switch_read_func(struct file *file, char __user *user_buf, si
 	TPD_ERR("%s left:%s right:%s\n", __func__,
 		    key_switch?"key_back":"key_appselect",
 		    key_switch?"key_appselect":"key_back");
-	ret = snprintf(page, PAGE_SIZE, "key_switch left:%s right:%s\n",
+	ret = snprintf(page, PAGESIZE, "key_switch left:%s right:%s\n",
 		    key_switch?"key_back":"key_appselect",
 		    key_switch?"key_appselect":"key_back");
 	ret = simple_read_from_buffer(user_buf, count, ppos, page, strlen(page));

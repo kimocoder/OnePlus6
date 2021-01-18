@@ -857,6 +857,7 @@ int diag_add_diag_id_to_list(uint8_t diag_id, char *process_name,
 	if (!new_item)
 		return -ENOMEM;
 	kmemleak_not_leak(new_item);
+	process_len = strlen(process_name);
 	new_item->process_name = kzalloc(strlen(process_name) + 1, GFP_KERNEL);
 	if (!new_item->process_name) {
 		kfree(new_item);
@@ -867,7 +868,7 @@ int diag_add_diag_id_to_list(uint8_t diag_id, char *process_name,
 	new_item->diag_id = diag_id;
 	new_item->pd_val = pd_val;
 	new_item->peripheral = peripheral;
-	strlcpy(new_item->process_name, process_name, strlen(process_name) + 1);
+	strlcpy(new_item->process_name, process_name, process_len + 1);
 	INIT_LIST_HEAD(&new_item->link);
 	mutex_lock(&driver->diag_id_mutex);
 	list_add_tail(&new_item->link, &driver->diag_id_list);

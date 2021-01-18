@@ -1136,7 +1136,7 @@ static int msm_pcm_adsp_stream_cmd_put(struct snd_kcontrol *kcontrol,
 	}
 
 	if (!substream->runtime) {
-		pr_err("%s substream runtime not found\n", __func__);
+		pr_debug("%s substream runtime not found\n", __func__);
 		ret = -EINVAL;
 		goto done;
 	}
